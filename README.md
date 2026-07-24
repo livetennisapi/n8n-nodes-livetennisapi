@@ -65,6 +65,10 @@ These reflect real behaviour of the live feed — the node passes the data throu
   tier, not that your key is invalid.
 - Fixture **Get Many** may occasionally include already-finished fixtures or return an empty
   list (a known upstream quirk); the node passes the response through as-is.
+- **Return All** pages through results 200 at a time with no delay between pages. On the free
+  tier (30 requests/minute) a very large result set — for example completed matches, which can
+  span thousands of records — can hit the per-minute rate limit mid-pagination and fail with a
+  429. Prefer **Limit** with an explicit value on large buckets, or use a higher plan tier.
 
 ## Compatibility
 
