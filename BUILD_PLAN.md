@@ -91,8 +91,8 @@ Build, then `/full-review`. Most relevant personas: `/code-logic-review` (routin
 `/security-audit` (credential handling, key hygiene), `/qa-automation` (live-op matrix).
 
 ## Status ledger
-- BUILD-001 pending
-- BUILD-002 pending
+- BUILD-001 done (commit: scaffold + lockfile, npm install green)
+- BUILD-002 done (build + lint exit 0)
 - BUILD-003 pending
 - BUILD-004 pending
 - BUILD-005 pending
