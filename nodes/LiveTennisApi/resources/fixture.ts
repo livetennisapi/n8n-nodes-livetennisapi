@@ -63,7 +63,6 @@ export const fixtureDescription: INodeProperties[] = [
 						limitParameter: 'limit',
 						offsetParameter: 'offset',
 						pageSize: 200,
-						rootProperty: 'data',
 						type: 'query',
 					},
 				},
