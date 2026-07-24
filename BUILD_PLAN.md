@@ -95,5 +95,5 @@ Build, then `/full-review`. Most relevant personas: `/code-logic-review` (routin
 - BUILD-002 done (build + lint exit 0)
 - BUILD-003 done (tsc + eslint green; 97 n8n-nodes-base + @n8n/community-nodes rules active)
 - BUILD-004 done (build+lint+pack green; @n8n/scan-community-package analyzePackage passed on source AND tarball legs with production patterns; author-email error + icon-variant warnings fixed)
-- BUILD-005 pending
+- BUILD-005 done (in-n8n execute DONE: n8n 2.31.5, all 7 ops success vs live API; fixed real bug: pagination rootProperty must not duplicate postReceive unwrap)
 - BUILD-006 pending
