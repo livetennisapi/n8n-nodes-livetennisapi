@@ -8,7 +8,10 @@ export class LiveTennisApi implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Live Tennis API',
 		name: 'liveTennisApi',
-		icon: 'file:../../icons/livetennisapi.svg',
+		icon: {
+			light: 'file:../../icons/livetennisapi.svg',
+			dark: 'file:../../icons/livetennisapi.dark.svg',
+		},
 		group: ['input'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',

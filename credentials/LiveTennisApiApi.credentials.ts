@@ -11,7 +11,10 @@ export class LiveTennisApiApi implements ICredentialType {
 
 	displayName = 'Live Tennis API';
 
-	icon: Icon = 'file:../icons/livetennisapi.svg';
+	icon: Icon = {
+		light: 'file:../icons/livetennisapi.svg',
+		dark: 'file:../icons/livetennisapi.dark.svg',
+	};
 
 	documentationUrl = 'https://livetennisapi.com';
 
