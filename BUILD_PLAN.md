@@ -93,7 +93,7 @@ Build, then `/full-review`. Most relevant personas: `/code-logic-review` (routin
 ## Status ledger
 - BUILD-001 done (commit: scaffold + lockfile, npm install green)
 - BUILD-002 done (build + lint exit 0)
-- BUILD-003 pending
+- BUILD-003 done (tsc + eslint green; 97 n8n-nodes-base + @n8n/community-nodes rules active)
 - BUILD-004 pending
 - BUILD-005 pending
 - BUILD-006 pending
