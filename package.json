@@ -12,7 +12,8 @@
 		"livetennisapi"
 	],
 	"author": {
-		"name": "Ben"
+		"name": "Ben",
+		"email": "bigben2323@me.com"
 	},
 	"repository": {
 		"type": "git",
