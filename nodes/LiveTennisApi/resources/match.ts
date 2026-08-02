@@ -94,7 +94,8 @@ export const matchDescription: INodeProperties[] = [
 			{
 				name: 'Completed',
 				value: 'completed',
-				description: 'Matches that have finished',
+				description:
+						'Matches that have finished — bulk completed listings need the BASIC tier or any History plan (403 on a FREE key)',
 			},
 			{
 				name: 'Live',

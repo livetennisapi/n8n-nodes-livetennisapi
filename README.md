@@ -65,10 +65,16 @@ These reflect real behaviour of the live feed — the node passes the data throu
   tier, not that your key is invalid.
 - Fixture **Get Many** may occasionally include already-finished fixtures or return an empty
   list (a known upstream quirk); the node passes the response through as-is.
-- **Return All** pages through results 200 at a time with no delay between pages. On the free
-  tier (30 requests/minute) a very large result set — for example completed matches, which can
-  span thousands of records — can hit the per-minute rate limit mid-pagination and fail with a
-  429. Prefer **Limit** with an explicit value on large buckets, or use a higher plan tier.
+- Bulk completed-match paging (**Get Many** with Status = `completed`) is **not available on
+  the FREE tier at all** — it returns a `403 upgrade_required`. It needs the **BASIC** tier
+  ($9.99/mo) or **any History plan** — upgrade at
+  [livetennisapi.com/subscribe/upgrade](https://livetennisapi.com/subscribe/upgrade). Fetching
+  a single completed match by ID with **Get** stays free.
+- **Return All** pages through results 200 at a time with no delay between pages — one API
+  request per page. On a large bucket that can hit the per-minute rate limit mid-pagination
+  and fail with a 429, and repeated **Return All** runs over big result sets (completed
+  matches can span thousands of records) can exhaust the FREE tier's **1,000 requests/day**
+  cap. Prefer **Limit** with an explicit value on large buckets, or use a higher plan tier.
 
 ## Compatibility
 
