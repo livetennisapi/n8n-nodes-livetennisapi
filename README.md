@@ -21,7 +21,7 @@ in the n8n community nodes documentation. The package name is `n8n-nodes-liveten
 
 ## Credentials
 
-Sign up for a free API key (1000 requests/day, 30/minute, no card) at
+Sign up for a free API key (100 requests/day, 30/minute, no card) at
 [livetennisapi.com/subscribe/free](https://livetennisapi.com/subscribe/free).
 
 Create a **Live Tennis API** credential in n8n and paste the key. The node sends it as an
@@ -73,7 +73,7 @@ These reflect real behaviour of the live feed — the node passes the data throu
 - **Return All** pages through results 200 at a time with no delay between pages — one API
   request per page. On a large bucket that can hit the per-minute rate limit mid-pagination
   and fail with a 429, and repeated **Return All** runs over big result sets (completed
-  matches can span thousands of records) can exhaust the FREE tier's **1,000 requests/day**
+  matches can span thousands of records) can exhaust the FREE tier's **100 requests/day**
   cap. Prefer **Limit** with an explicit value on large buckets, or use a higher plan tier.
 
 ## Compatibility

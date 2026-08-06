@@ -26,7 +26,7 @@ export class LiveTennisApiApi implements ICredentialType {
 			typeOptions: { password: true },
 			default: '',
 			description:
-				'Your Live Tennis API key. Get a free key (1000 requests/day) at https://livetennisapi.com/subscribe/free.',
+				'Your Live Tennis API key. Get a free key (100 requests/day) at https://livetennisapi.com/subscribe/free.',
 		},
 	];
 
