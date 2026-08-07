@@ -18,6 +18,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Truth-pin check
+        run: sh scripts/truthcheck.sh
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
