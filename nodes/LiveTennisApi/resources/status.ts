@@ -1,4 +1,5 @@
 import type { INodeProperties } from 'n8n-workflow';
+import { handleApiErrors } from './shared';
 
 export const statusDescription: INodeProperties[] = [
 	{
@@ -21,6 +22,10 @@ export const statusDescription: INodeProperties[] = [
 					request: {
 						method: 'GET',
 						url: '/health',
+						ignoreHttpStatusErrors: true,
+					},
+					output: {
+						postReceive: [handleApiErrors],
 					},
 				},
 			},

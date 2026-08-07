@@ -16,7 +16,7 @@ export class LiveTennisApiApi implements ICredentialType {
 		dark: 'file:../icons/livetennisapi.dark.svg',
 	};
 
-	documentationUrl = 'https://livetennisapi.com';
+	documentationUrl = 'https://docs.livetennisapi.com';
 
 	properties: INodeProperties[] = [
 		{

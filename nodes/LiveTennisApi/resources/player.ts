@@ -1,4 +1,5 @@
 import type { INodeProperties } from 'n8n-workflow';
+import { handleApiErrors } from './shared';
 
 const showOnlyForPlayers = {
 	resource: ['player'],
@@ -28,6 +29,10 @@ export const playerDescription: INodeProperties[] = [
 					request: {
 						method: 'GET',
 						url: '=/players/{{$parameter.playerId}}',
+						ignoreHttpStatusErrors: true,
+					},
+					output: {
+						postReceive: [handleApiErrors],
 					},
 				},
 			},
@@ -40,9 +45,11 @@ export const playerDescription: INodeProperties[] = [
 					request: {
 						method: 'GET',
 						url: '/players',
+						ignoreHttpStatusErrors: true,
 					},
 					output: {
 						postReceive: [
+							handleApiErrors,
 							{
 								type: 'rootProperty',
 								properties: {

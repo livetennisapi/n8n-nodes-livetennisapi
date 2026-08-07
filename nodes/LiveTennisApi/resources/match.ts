@@ -1,4 +1,5 @@
 import type { INodeProperties } from 'n8n-workflow';
+import { handleApiErrors } from './shared';
 
 const showOnlyForMatches = {
 	resource: ['match'],
@@ -29,6 +30,10 @@ export const matchDescription: INodeProperties[] = [
 					request: {
 						method: 'GET',
 						url: '=/matches/{{$parameter.matchId}}',
+						ignoreHttpStatusErrors: true,
+					},
+					output: {
+						postReceive: [handleApiErrors],
 					},
 				},
 			},
@@ -41,9 +46,11 @@ export const matchDescription: INodeProperties[] = [
 					request: {
 						method: 'GET',
 						url: '/matches',
+						ignoreHttpStatusErrors: true,
 					},
 					output: {
 						postReceive: [
+							handleApiErrors,
 							{
 								type: 'rootProperty',
 								properties: {
@@ -63,6 +70,27 @@ export const matchDescription: INodeProperties[] = [
 					request: {
 						method: 'GET',
 						url: '=/matches/{{$parameter.matchId}}/score',
+						ignoreHttpStatusErrors: true,
+					},
+					output: {
+						postReceive: [handleApiErrors],
+					},
+				},
+			},
+			{
+				name: 'Get Statistics',
+				value: 'getStatistics',
+				action: 'Get match statistics',
+				description:
+					'Get in-play statistics for one match — aces, double faults, serve split, hold/break percentages, break points, service and return points. Works on live and completed matches. Needs the ULTRA tier (403 upgrade_required below it).',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '=/matches/{{$parameter.matchId}}/statistics',
+						ignoreHttpStatusErrors: true,
+					},
+					output: {
+						postReceive: [handleApiErrors],
 					},
 				},
 			},
@@ -79,7 +107,7 @@ export const matchDescription: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['match'],
-				operation: ['get', 'getScore'],
+				operation: ['get', 'getScore', 'getStatistics'],
 			},
 		},
 	},
@@ -181,6 +209,69 @@ export const matchDescription: INodeProperties[] = [
 		},
 		options: [
 			{
+				displayName: 'Country',
+				name: 'country',
+				type: 'string',
+				default: '',
+				placeholder: 'e.g. sui',
+				description:
+					'Only matches where either player\'s country equals this lowercase 3-letter IOC-style code (e.g. ned, sui, gre — the same vocabulary the Player object returns, not ISO-3166). Players with no recorded country never match. Anything that is not 3 letters is a 400.',
+				routing: {
+					request: {
+						qs: {
+							country: '={{ $value }}',
+						},
+					},
+				},
+			},
+			{
+				displayName: 'From Date',
+				name: 'from',
+				type: 'string',
+				default: '',
+				placeholder: 'e.g. 2026-08-01',
+				description:
+					'Earliest play date — YYYY-MM-DD or an ISO-8601 UTC datetime (400 if unparseable). A bare date is a UTC day boundary. Applies to every status.',
+				routing: {
+					request: {
+						qs: {
+							from: '={{ $value }}',
+						},
+					},
+				},
+			},
+			{
+				displayName: 'Player ID',
+				name: 'player',
+				type: 'number',
+				default: 0,
+				description:
+					'Only matches where this player ID is either participant. An unknown ID returns an empty list, not an error.',
+				routing: {
+					request: {
+						qs: {
+							player: '={{ $value }}',
+						},
+					},
+				},
+			},
+			{
+				displayName: 'To Date',
+				name: 'to',
+				type: 'string',
+				default: '',
+				placeholder: 'e.g. 2026-08-07',
+				description:
+					'Latest play date (a bare date includes the whole UTC day); must not be before From Date',
+				routing: {
+					request: {
+						qs: {
+							to: '={{ $value }}',
+						},
+					},
+				},
+			},
+			{
 				displayName: 'Tour',
 				name: 'tour',
 				type: 'options',
@@ -208,7 +299,7 @@ export const matchDescription: INodeProperties[] = [
 				],
 				default: 'atp',
 				description:
-					'Restrict results to one tour. Each value covers its singles and doubles draws. Note the tour field on returned records uses a different, more granular vocabulary.',
+					'Restrict results to one tour. Each value covers its singles and doubles draws. An unknown value is a 400, never silently ignored. Note the tour field on returned records uses a different, more granular vocabulary.',
 				routing: {
 					request: {
 						qs: {

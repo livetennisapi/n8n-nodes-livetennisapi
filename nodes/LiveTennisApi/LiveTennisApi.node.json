@@ -6,12 +6,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://livetennisapi.com"
+				"url": "https://docs.livetennisapi.com"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://livetennisapi.com"
+				"url": "https://docs.livetennisapi.com"
 			}
 		]
 	}

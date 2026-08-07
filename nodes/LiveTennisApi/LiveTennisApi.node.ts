@@ -1,7 +1,10 @@
 import { NodeConnectionTypes, type INodeType, type INodeTypeDescription } from 'n8n-workflow';
+import { archiveDescription } from './resources/archive';
 import { fixtureDescription } from './resources/fixture';
+import { h2hDescription } from './resources/h2h';
 import { matchDescription } from './resources/match';
 import { playerDescription } from './resources/player';
+import { rankingDescription } from './resources/ranking';
 import { statusDescription } from './resources/status';
 
 export class LiveTennisApi implements INodeType {
@@ -16,7 +19,7 @@ export class LiveTennisApi implements INodeType {
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
 		description:
-			'Real-time tennis scores, matches, players and fixtures from the Live Tennis API',
+			'Real-time tennis scores, matches, players, fixtures, rankings, head-to-head records and the 1968–2022 results archive from the Live Tennis API',
 		defaults: {
 			name: 'Live Tennis API',
 		},
@@ -43,8 +46,16 @@ export class LiveTennisApi implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
+						name: 'Archive',
+						value: 'archive',
+					},
+					{
 						name: 'Fixture',
 						value: 'fixture',
+					},
+					{
+						name: 'H2H',
+						value: 'h2h',
 					},
 					{
 						name: 'Match',
@@ -55,15 +66,22 @@ export class LiveTennisApi implements INodeType {
 						value: 'player',
 					},
 					{
+						name: 'Ranking',
+						value: 'ranking',
+					},
+					{
 						name: 'Status',
 						value: 'status',
 					},
 				],
 				default: 'match',
 			},
+			...archiveDescription,
 			...fixtureDescription,
+			...h2hDescription,
 			...matchDescription,
 			...playerDescription,
+			...rankingDescription,
 			...statusDescription,
 		],
 	};
