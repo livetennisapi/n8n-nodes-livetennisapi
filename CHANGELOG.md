@@ -25,9 +25,14 @@
   describes the old grid), BASIC 1,000/day, PRO 10,000/day, ULTRA
   500,000/day. All quota copy in the README and node updated.
 - License holder corrected to Live Tennis API. Docs links now point at
-  docs.livetennisapi.com. `dist/` is no longer tracked in git — the release
-  workflow builds it at publish time. Added `scripts/truthcheck.sh` and a CI
-  step pinning product facts.
+  docs.livetennisapi.com. `dist/` stays untracked — the release workflow
+  builds it at publish time. Added `scripts/truthcheck.sh` and a CI step
+  pinning product facts.
+- **One publish workflow.** The two tag-triggered npm publish workflows are
+  consolidated into `release.yml` (fires on `v*.*.*`, builds, then publishes
+  with provenance; auth via the `NPM_TOKEN` secret or npm Trusted
+  Publishing). Previously a `vX.Y.Z` tag matched both workflows' globs and
+  would have published twice.
 
 ## 0.1.2 — 2026-08-02
 

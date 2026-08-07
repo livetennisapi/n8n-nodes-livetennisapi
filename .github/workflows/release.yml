@@ -1,3 +1,29 @@
+# Publishes this n8n community node package to npm on every v*.*.* tag push,
+# with an npm provenance attestation (required for community nodes published
+# after May 1 2026 — provenance lets anyone verify the package was built by
+# this workflow from this repository and commit).
+#
+# ── ONE-TIME SETUP (either option works with --provenance) ────────────────────
+#
+# Option A — npm Automation Token:
+#   1. On npmjs.com: Access Tokens → Generate New Token → Granular Access Token,
+#      scoped to this package with "Read and write" publish permission.
+#   2. In GitHub: Settings → Secrets and variables → Actions → New secret,
+#      name NPM_TOKEN, paste the token.
+#
+# Option B — OIDC Trusted Publishing (no long-lived secret):
+#   On npmjs.com, in the package's settings → Trusted Publishers, add
+#   GitHub Actions with repository livetennisapi/n8n-nodes-livetennisapi and
+#   workflow release.yml. Leave NPM_TOKEN unset.
+#
+# ── RELEASE PROCESS ───────────────────────────────────────────────────────────
+#
+#   1. Bump the version in package.json and update CHANGELOG.md (committed).
+#   2. git tag -a vX.Y.Z -m "vX.Y.Z" && git push origin vX.Y.Z
+#
+# `npm publish` runs the package's prepublishOnly gate (n8n-node prerelease)
+# before anything is uploaded.
+
 name: Release
 
 on:
@@ -10,6 +36,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      # Required to mint the OIDC token that signs the provenance attestation
+      # (and used for auth itself under Trusted Publishing).
       id-token: write
     steps:
       - uses: actions/checkout@v4
@@ -20,3 +48,5 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
