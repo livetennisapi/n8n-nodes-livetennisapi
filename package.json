@@ -1,7 +1,7 @@
 {
   "name": "n8n-nodes-livetennisapi",
-  "version": "0.1.2",
-  "description": "n8n community node for the Live Tennis API \u2014 real-time tennis scores, matches, players and fixtures",
+  "version": "0.2.0",
+  "description": "n8n community node for the Live Tennis API \u2014 real-time tennis scores, matches, players, fixtures, rankings, head-to-head and the 1968\u20132022 results archive",
   "license": "MIT",
   "homepage": "https://github.com/livetennisapi/n8n-nodes-livetennisapi",
   "keywords": [
