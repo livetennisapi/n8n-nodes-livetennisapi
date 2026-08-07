@@ -1,4 +1,5 @@
 import type { INodeProperties } from 'n8n-workflow';
+import { handleApiErrors } from './shared';
 
 const showOnlyForFixtureGetMany = {
 	resource: ['fixture'],
@@ -27,9 +28,11 @@ export const fixtureDescription: INodeProperties[] = [
 					request: {
 						method: 'GET',
 						url: '/fixtures',
+						ignoreHttpStatusErrors: true,
 					},
 					output: {
 						postReceive: [
+							handleApiErrors,
 							{
 								type: 'rootProperty',
 								properties: {
