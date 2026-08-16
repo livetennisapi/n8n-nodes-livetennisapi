@@ -11,6 +11,11 @@ tennis scores, match data, player profiles, fixtures, rankings, head-to-head rec
 [n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/)
 workflow automation platform.
 
+> **Version note:** npm currently serves **0.1.0** while this repo is at
+> **0.2.0** — newer releases are awaiting a publish-credential fix. To get the
+> latest now, install from source (clone, `npm install && npm run build`, then
+> `npm install <path>` from your n8n custom directory).
+
 - [Installation](#installation)
 - [Credentials](#credentials)
 - [Operations](#operations)
