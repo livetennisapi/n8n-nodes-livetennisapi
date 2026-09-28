@@ -12,8 +12,9 @@
     "livetennisapi"
   ],
   "author": {
-    "name": "Live Tennis API",
-    "email": "hello@livetennisapi.com"
+    "name": "Synapse Research Ltd",
+    "email": "hello@livetennisapi.com",
+    "url": "https://synapsereality.io"
   },
   "repository": {
     "type": "git",
