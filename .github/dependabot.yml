@@ -16,3 +16,9 @@ updates:
     groups:
       npm-minor-patch:
         update-types: [minor, patch]
+    ignore:
+      # TypeScript 7 (native compiler) breaks `n8n-node lint`: typescript-eslint
+      # inside @n8n/node-cli reads compiler API members TS 7 does not expose.
+      # Stay on 5.x. Drop this rule when @n8n/node-cli supports TypeScript 7.
+      - dependency-name: typescript
+        update-types: [version-update:semver-major]
