@@ -22,3 +22,9 @@ updates:
       # Stay on 5.x. Drop this rule when @n8n/node-cli supports TypeScript 7.
       - dependency-name: typescript
         update-types: [version-update:semver-major]
+      # @n8n/node-cli 1.x is the n8n 3 release candidate, published under the npm
+      # `rc` dist-tag while `latest` stays on the 0.x line. Dependabot offers it
+      # because the version has no prerelease suffix. Stay on 0.x. Drop this rule
+      # once `npm view @n8n/node-cli dist-tags.latest` prints a 1.x version.
+      - dependency-name: '@n8n/node-cli'
+        versions: ['>=1.0.0']
